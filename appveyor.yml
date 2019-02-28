@@ -12,7 +12,7 @@ after_build:
 - dotnet pack "WeChatLogin" -c %CONFIGURATION% --no-build -o artifacts
 
 artifacts:
-- path: .\artifacts\**\*.nupkg
+- path: \**\artifacts\**\*.*
 
 deploy:
   provider: NuGet
