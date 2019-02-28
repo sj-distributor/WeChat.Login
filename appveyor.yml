@@ -1,0 +1,29 @@
+image: Visual Studio 2017
+configuration: Release
+before_build:
+- cmd: 
+dotnet restore
+nuget restore
+
+build:
+  project: WeChatLogin.sln
+  verbosity: minimal
+  
+after_build:
+- dotnet pack "WeChatLogin" -c %CONFIGURATION% --no-build -o artifacts
+
+artifacts:
+- path: .\artifacts\**\*.nupkg
+
+deploy:
+  provider: NuGet
+  on:
+    branch: master
+  api_key:
+    secure: npmhdOZwzVgB0+AaQy2Se9vNqEnnTQKvi7veLYWV5peldIsTIb6ho3eDM+D5z5SN
+  skip_symbols: true
+  artifact: /.*\.nupkg/
+  
+cache:
+- '%USERPROFILE%\.nuget\packages'
+on_finish: # Done
