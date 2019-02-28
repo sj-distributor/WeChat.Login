@@ -1,9 +1,8 @@
 image: Visual Studio 2017
 configuration: Release
 before_build:
-- cmd: 
-dotnet restore
-nuget restore
+- cmd: dotnet restore
+- cmd: nuget restore
 
 build:
   project: WeChatLogin.sln
